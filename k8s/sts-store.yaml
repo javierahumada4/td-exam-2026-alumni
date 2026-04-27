@@ -3,29 +3,29 @@ kind: StatefulSet
 metadata:
   name: sts-storage
 spec:
-  serviceName: <placeholder>
+  serviceName: svc-storage
   replicas: 1
   selector:
     matchLabels:
-      app: <placeholder>
+      app: backend-storage
   template:
     metadata:
       labels:
-        app: <placeholder>
+        app: backend-storage
     spec:
       containers:
-        - name: storage
-          image: <placeholder>
+        - name: backend-storage
+          image: gcr.io/javierahumadaortiz/backend-storage:latest
           ports:
             - containerPort: 3000
           volumeMounts:
-            - name: <placeholder>
+            - name: backend-storage-data
               mountPath: /data
   volumeClaimTemplates:
     - metadata:
-        name: <placeholder>
+        name: backend-storage-data
       spec:
-        accessModes: <placeholder>
+        accessModes: ["ReadWriteOnce"]
         storageClassName: standard
         resources:
           requests:
